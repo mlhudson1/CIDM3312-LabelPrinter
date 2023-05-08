@@ -13,6 +13,7 @@ namespace LabelPrinter{
         public string woNumber{get;set;} = string.Empty;
         public string soNumber{get;set;} = string.Empty;
         public DateTime dueDate{get;set;}
+        public string PrintError{get;set;} = string.Empty;
         
     }
 }
