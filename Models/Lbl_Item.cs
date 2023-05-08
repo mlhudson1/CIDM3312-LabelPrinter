@@ -1,6 +1,6 @@
 namespace LabelPrinter{
-    public  class Lbl_Work_Order{
-        public int Lbl_Work_OrderID{get;set;}
+    public  class Lbl_Item{
+        public int Lbl_ItemID{get;set;}
         public User addUser{get;set;} = default!;
         public DateTime addDate{get;set;}
         public bool printed{get;set;} = false;
