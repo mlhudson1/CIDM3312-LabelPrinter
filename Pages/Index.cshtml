@@ -5,6 +5,22 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Log In</h1>
+    <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="usrName" class="control-label"></label>
+                <input asp-for="usrName" class="form-control" />
+                <span asp-validation-for="usrName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="usrPassword" class="control-label"></label>
+                @Html.Password("Password",Model.usrPassword)
+                <span asp-validation-for="usrPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            </div>
+        </form>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
