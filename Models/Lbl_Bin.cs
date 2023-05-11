@@ -5,7 +5,6 @@ namespace LabelPrinter{
         public DateTime addDate{get;set;}
         public bool printed{get;set;} = false;
         public DateTime printDate{get;set;}
-        public Printer Printer{get;set;} = default!;
         public int qty{get;set;}
         public string binID{get;set;} =string.Empty;
         public string binName{get;set;} = string.Empty;
