@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 namespace LabelPrinter.Models{
-    public class Context:DbContext
+    public class LabelDBContext:DbContext
     {
-        public Context(DbContextOptions<Context> options): base(options){
+        public LabelDBContext(DbContextOptions<LabelDBContext> options): base(options){
 
         }
 

@@ -1,4 +1,7 @@
-namespace LabelPrinter{
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+
+namespace LabelPrinter.Models{
     public  class Lbl_Bin{
         public int Lbl_BinID{get;set;}
         public User addUser{get;set;} = default!;

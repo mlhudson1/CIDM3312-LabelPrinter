@@ -1,7 +1,12 @@
+using LabelPrinter.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<LabelDBContext>(options=> options.UseSqlite(builder.Configuration.GetConnectionString("LabelContext")));
 
 builder.Services.AddDistributedMemoryCache();
 

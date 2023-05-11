@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-namespace LabelPrinter{
+using Microsoft.EntityFrameworkCore;
+namespace LabelPrinter.Models{
     public class User{
         public int UserID{get;set;}
         public string UserName{get;set;} = string.Empty;
