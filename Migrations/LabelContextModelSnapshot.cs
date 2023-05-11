@@ -3,19 +3,16 @@ using System;
 using LabelPrinter.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace CIDM3312_LabelPrinter.Migrations
 {
-    [DbContext(typeof(LabelDBContext))]
-    [Migration("20230511123026_InitialCreate")]
-    partial class InitialCreate
+    [DbContext(typeof(LabelContext))]
+    partial class LabelContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
@@ -26,15 +23,8 @@ namespace CIDM3312_LabelPrinter.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PrintError")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("addDate")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("addUserUserID")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("binID")
                         .IsRequired()
@@ -44,23 +34,12 @@ namespace CIDM3312_LabelPrinter.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("dueDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("printDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("printed")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("qty")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Lbl_BinID");
 
-                    b.HasIndex("addUserUserID");
-
-                    b.ToTable("Lbl_Bin");
+                    b.ToTable("Lbls_Bin");
                 });
 
             modelBuilder.Entity("LabelPrinter.Models.Lbl_Item", b =>
@@ -69,15 +48,8 @@ namespace CIDM3312_LabelPrinter.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("PrintError")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("addDate")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("addUserUserID")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("description")
                         .IsRequired()
@@ -86,12 +58,6 @@ namespace CIDM3312_LabelPrinter.Migrations
                     b.Property<string>("item")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("printDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("printed")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("qty")
                         .HasColumnType("INTEGER");
@@ -102,9 +68,7 @@ namespace CIDM3312_LabelPrinter.Migrations
 
                     b.HasKey("Lbl_ItemID");
 
-                    b.HasIndex("addUserUserID");
-
-                    b.ToTable("Lbl_Item");
+                    b.ToTable("Lbls_Item");
                 });
 
             modelBuilder.Entity("LabelPrinter.Models.User", b =>
@@ -135,7 +99,7 @@ namespace CIDM3312_LabelPrinter.Migrations
 
                     b.HasKey("UserID");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("LabelPrinter.Models.UserLbl_Bin", b =>
@@ -166,28 +130,6 @@ namespace CIDM3312_LabelPrinter.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("UserLbl_Item");
-                });
-
-            modelBuilder.Entity("LabelPrinter.Models.Lbl_Bin", b =>
-                {
-                    b.HasOne("LabelPrinter.Models.User", "addUser")
-                        .WithMany()
-                        .HasForeignKey("addUserUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("addUser");
-                });
-
-            modelBuilder.Entity("LabelPrinter.Models.Lbl_Item", b =>
-                {
-                    b.HasOne("LabelPrinter.Models.User", "addUser")
-                        .WithMany()
-                        .HasForeignKey("addUserUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("addUser");
                 });
 
             modelBuilder.Entity("LabelPrinter.Models.UserLbl_Bin", b =>

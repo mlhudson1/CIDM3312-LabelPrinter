@@ -1,14 +1,9 @@
 /**/
 using Microsoft.EntityFrameworkCore;
 namespace LabelPrinter.Models{
-
-    public static class SeedData
-    {
-        public static void Initialize(IServiceProvider serviceProvider)
-        {
-            using (var context = new LabelDBContext(
-                serviceProvider.GetRequiredService<DbContextOptions<LabelDBContext>>()))
-            {
+    public static class SeedData{
+        public static void Initialize(IServiceProvider serviceProvider){
+            using(var context = new LabelContext(serviceProvider.GetRequiredService<DbContextOptions<LabelContext>>())){
                 if(context.Users.Any()){ return;}
                 List<User> users = new List<User>{
                     new User {UserName="njohnson", FirstName="Norman", LastName="Johnson", Password="njohnson", Role="Psychologist" },
@@ -17,7 +12,7 @@ namespace LabelPrinter.Models{
                     new User {UserName="tfielding", FirstName="Ted", LastName="Fielding", Password="tfielding", Role="Astrophysicist" },
                     new User {UserName="alevine", FirstName="Arthur", LastName="Levine", Password="alevine", Role="Marine Biologist" }
                 };
-                context.AddRange(users);
+                context.Users.AddRange(users);
 
                 List<Lbl_Item> itmLbls = new List<Lbl_Item>{
                     new Lbl_Item {addDate= new DateTime(2023, 5, 1, 7, 47, 0),qty=1,item="90276-4623-PL",upc="703673368384",description="Trend Flipper 60 x 24 Table w/Gormmet - Graphite Nebula Top - Platinum Edgeband - Black Base"},
@@ -108,7 +103,7 @@ namespace LabelPrinter.Models{
                     new UserLbl_Bin{UserID=3, Lbl_BinID=18},
                     new UserLbl_Bin{UserID=4, Lbl_BinID=19},
                     new UserLbl_Bin{UserID=4, Lbl_BinID=20}                    
-                },
+                };
                 context.AddRange(usrBinPrntd);
 
                 List<UserLbl_Item> usrItmPrntd = new List<UserLbl_Item>{
@@ -152,7 +147,7 @@ namespace LabelPrinter.Models{
                     new UserLbl_Item{UserID=1, Lbl_ItemID=38},
                     new UserLbl_Item{UserID=1, Lbl_ItemID=39},
                     new UserLbl_Item{UserID=4, Lbl_ItemID=40}
-                },
+                };
                 context.AddRange(usrItmPrntd);
                 context.SaveChanges();
             }
