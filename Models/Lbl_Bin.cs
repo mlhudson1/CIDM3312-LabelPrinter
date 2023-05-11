@@ -10,6 +10,14 @@ namespace LabelPrinter{
         public string binName{get;set;} = string.Empty;
         public DateTime dueDate{get;set;}
         public string PrintError{get;set;} = string.Empty;
+        public List<UserLbl_Bin> UserLbl_Bins{get;set;} = default!;
         
+    }
+
+    public class UserLbl_Bin{
+        public int Lbl_BinID {get;set;}
+        public int UserID{get;set;}
+        public Lbl_Bin Lbl_Bin {get;set;} = default!;
+        public User User{get;set;} = default!;
     }
 }
