@@ -4,16 +4,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CIDM3312_LabelPrinter.Pages.Labels;
 
-public class LabelsModel : PageModel
+public class Lbl_AddressModel : PageModel
 {
-     private readonly ILogger<LabelsModel> _logger;
+     private readonly ILogger<Lbl_AddressModel> _logger;
 
-    public LabelsModel(ILogger<LabelsModel> logger)
+    public Lbl_AddressModel(ILogger<Lbl_AddressModel> logger)
     {
         _logger = logger;
     }
 
     public void OnGet()
     {
+
     }
 }
