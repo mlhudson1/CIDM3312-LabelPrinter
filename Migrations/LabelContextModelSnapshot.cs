@@ -23,9 +23,6 @@ namespace CIDM3312_LabelPrinter.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("addDate")
                         .HasColumnType("TEXT");
 
@@ -42,8 +39,6 @@ namespace CIDM3312_LabelPrinter.Migrations
 
                     b.HasKey("Lbl_BinID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("Lbls_Bin");
                 });
 
@@ -51,9 +46,6 @@ namespace CIDM3312_LabelPrinter.Migrations
                 {
                     b.Property<int>("Lbl_ItemID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UserID")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("addDate")
@@ -75,8 +67,6 @@ namespace CIDM3312_LabelPrinter.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("Lbl_ItemID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Lbls_Item");
                 });
@@ -112,26 +102,89 @@ namespace CIDM3312_LabelPrinter.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("LabelPrinter.Models.Lbl_Bin", b =>
+            modelBuilder.Entity("LabelPrinter.Models.UserLbl_Bin", b =>
                 {
-                    b.HasOne("LabelPrinter.Models.User", "user")
-                        .WithMany()
+                    b.Property<int>("Lbl_BinID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Lbl_BinID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("UserLbl_Bin");
+                });
+
+            modelBuilder.Entity("LabelPrinter.Models.UserLbl_Item", b =>
+                {
+                    b.Property<int>("Lbl_ItemID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Lbl_ItemID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("UserLbl_Item");
+                });
+
+            modelBuilder.Entity("LabelPrinter.Models.UserLbl_Bin", b =>
+                {
+                    b.HasOne("LabelPrinter.Models.Lbl_Bin", "Lbl_Bin")
+                        .WithMany("UserLbl_Bins")
+                        .HasForeignKey("Lbl_BinID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LabelPrinter.Models.User", "User")
+                        .WithMany("UserLbl_Bins")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("Lbl_Bin");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("LabelPrinter.Models.UserLbl_Item", b =>
+                {
+                    b.HasOne("LabelPrinter.Models.Lbl_Item", "Lbl_Item")
+                        .WithMany("UserLbl_Items")
+                        .HasForeignKey("Lbl_ItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LabelPrinter.Models.User", "User")
+                        .WithMany("UserLbl_Items")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lbl_Item");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("LabelPrinter.Models.Lbl_Bin", b =>
+                {
+                    b.Navigation("UserLbl_Bins");
                 });
 
             modelBuilder.Entity("LabelPrinter.Models.Lbl_Item", b =>
                 {
-                    b.HasOne("LabelPrinter.Models.User", "user")
-                        .WithMany()
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("UserLbl_Items");
+                });
 
-                    b.Navigation("user");
+            modelBuilder.Entity("LabelPrinter.Models.User", b =>
+                {
+                    b.Navigation("UserLbl_Bins");
+
+                    b.Navigation("UserLbl_Items");
                 });
 #pragma warning restore 612, 618
         }
