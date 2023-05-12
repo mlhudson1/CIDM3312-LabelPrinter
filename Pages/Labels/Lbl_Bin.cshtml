@@ -1,5 +1,18 @@
 @page
-@model LabelsModel
+@model Lbl_BinModel
 @{
     ViewData["Title"] = "Bin Labels";
 }
+
+<p>List of Labels</p>
+<table>
+@foreach(var label in Model.Labels){
+    <tr>
+        <td>@label.addDate</td>
+        <td>@label.qty</td>
+        <td>@label.binID</td>
+        <td>@label.binName</td>
+    
+    </tr>
+}
+</table>
