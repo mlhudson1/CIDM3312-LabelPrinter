@@ -10,6 +10,7 @@ public class Lbl_ItemModel : PageModel
 {
     private readonly LabelContext _context;
     private readonly ILogger<Lbl_ItemModel> _logger;
+    public List<Lbl_Item> Labels {get;set;}=default!;
     public Lbl_ItemModel(LabelContext context, ILogger<Lbl_ItemModel> logger)
     {
         _logger = logger;
@@ -18,6 +19,6 @@ public class Lbl_ItemModel : PageModel
 
     public void OnGet()
     {
-
+        Labels = _context.Lbls_Item.ToList();
     }
 }

@@ -1,5 +1,17 @@
 @page
-@model LabelsModel
+@model Lbl_ItemModel
 @{
     ViewData["Title"] = "Product Labels";
 }
+<p>List of Labels</p>
+<table>
+@foreach(var label in Model.Labels){
+    <tr>
+        <td>@label.addDate</td>
+        <td>@label.qty</td>
+        <td>@label.item</td>
+        <td>@label.description</td>
+    
+    </tr>
+}
+</table>
