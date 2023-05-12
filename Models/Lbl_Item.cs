@@ -9,6 +9,13 @@ namespace LabelPrinter.Models{
         public string item{get;set;} = string.Empty;
         public string upc{get;set;} = string.Empty;
         public string description{get;set;} = string.Empty;
-        public User user{get;set;}= default!;  
+        public List<UserLbl_Item> UserLbl_Items{get;set;} = default!;
+    }
+
+    public class UserLbl_Item{
+        public int Lbl_ItemID {get;set;}
+        public int UserID{get;set;}
+        public Lbl_Item Lbl_Item {get;set;} = default!;
+        public User User{get;set;} = default!;
     }
 }
